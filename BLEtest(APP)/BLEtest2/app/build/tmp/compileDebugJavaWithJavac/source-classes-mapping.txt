@@ -1,2 +1,0 @@
-com/example/bletest2/BuildConfig.java
- com.example.bletest2.BuildConfig
