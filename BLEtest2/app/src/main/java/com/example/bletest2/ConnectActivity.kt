@@ -18,7 +18,9 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.bletest3.Constants
+import kotlinx.android.synthetic.main.activity_connect.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.btnconnect
 import java.util.ArrayList
 
 class ConnectActivity : AppCompatActivity() {

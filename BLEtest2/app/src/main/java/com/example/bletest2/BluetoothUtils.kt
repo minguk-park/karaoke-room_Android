@@ -3,6 +3,8 @@ package com.example.bletest2
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattService
+import android.util.Log
+import android.view.View
 import com.example.bletest3.Constants
 import java.util.*
 
@@ -107,6 +109,31 @@ class BluetoothUtils {
                 }
             }
             return false
+        }
+
+        fun onClickWrite(mGatt:BluetoothGatt,commend:String){
+            //Log.d(TAG,"OnClickWrite to $mGatt")
+            val cmdCharacteristic= BluetoothUtils.findCommandCharacteristic((mGatt!!))
+            //val cmdCharacteristic=mGatt!!.services
+            //val cmdCharacteristic= BluetoothUtils.findCharacteristic((mGatt!!), CHARACTERISTIC_COMMAND_STRING)
+            //txtState.text="write 0x12"
+            if(cmdCharacteristic==null){
+                Log.e("Central", "Unable to find cmd characteristic $cmdCharacteristic")
+                //disconnectGattServer()
+                return
+            }
+            //"text" 보내기
+            val cmdBytes = ByteArray(256)
+            val text="test"
+            Log.d("Central","$cmdBytes // cmdBytes")
+            cmdCharacteristic.value=text.toByteArray()
+            //Log.d(TAG,"$cmdBytes")
+            val success: Boolean = mGatt!!.writeCharacteristic(cmdCharacteristic)
+            // check the result
+            if( !success ) {
+                Log.e("Central", "Failed to write command")
+            }
+            Log.d("Central","success : $success")
         }
     }
 }
